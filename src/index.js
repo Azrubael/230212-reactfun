@@ -6,9 +6,7 @@ import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <div>
-  <App />
-  Приложение работает!<br/><br/>
-  <button>Button</button>
-  </div>
+  React.createElement('button', {
+    onClick: () => console.log('CLICK!')
+  }, 'Just press me :)')
 )
