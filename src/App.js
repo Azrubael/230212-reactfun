@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import ClassCounter from './components/ClassCounter.jsx'
 import './styles/App.css'
 import PostList from './components/PostList.jsx'
+import MyInput from './components/UI/input/MyInput.jsx'
+import MyButton from './components/UI/button/MyButton.jsx'
 
 
 function App() {
@@ -18,6 +20,11 @@ function App() {
     {id: 3, title: "C#", body: "Description for C#"}
   ])
 
+  const [ title, setTitle ] = useState('I <3 programming')
+  const addNewPost = () => {
+
+  }
+
 
   return (
     <div className="App">
@@ -25,6 +32,16 @@ function App() {
         <input type="text" placeholder="Post title" />&nbsp;
         <input type="text" placeholder="Post description" />&nbsp;
         <button>Create post</button>
+      </form>
+      <form>
+      {/* Ниже показан управляемый компонент */}
+        <MyInput 
+          value={ title }
+          type="text"
+          placeholder="Post new title"
+        />
+        <MyInput type="text" placeholder="Post new description" />
+        <MyButton disabled={ true } onClick={ addNewPost }>Create post</MyButton>
       </form>
       <PostList posts={ posts } title="FIRST LIST OF POSTS"/>
       <br />
