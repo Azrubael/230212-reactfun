@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import { Counter } from './components/Counter.jsx'
 import ClassCounter from './components/ClassCounter.jsx'
 import './styles/App.css'
-import PostItem from './components/PostItem.jsx'
+import PostList from './components/PostList.jsx'
 
 
 function App() {
 
-  const [ value, setValue ] = useState('INPUT TEXT')
+  const [ posts, setPosts ] = useState([
+    {id: 1, title: "Javascript", body: "Description JavaScript"},
+    {id: 2, title: "Go language", body: "Description Go language"},
+    {id: 3, title: "Pithon", body: "Description Pithon"}
+  ])
 
 
   return (
     <div className="App">
-      <Counter />
-      <PostItem post={{id: 1, title: "Javascript", body: "Description JavaScript"}}/>
-      <br /><br /><br />
+      <PostList posts={ posts } />
       <ClassCounter />
-      <PostItem post={{id: 2, title: "Go language", body: "Description Go language"}}/>
     </div>
   )
 }
