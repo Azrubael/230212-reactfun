@@ -21,3 +21,9 @@
   justify-content: space-between;
   align-items: center;
 }
+
+input, button {
+  width: 9em;
+  flex: 1 1 auto;
+  padding: 2px;
+}

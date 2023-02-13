@@ -21,6 +21,11 @@ function App() {
 
   return (
     <div className="App">
+      <form>
+        <input type="text" placeholder="Post title" />&nbsp;
+        <input type="text" placeholder="Post description" />&nbsp;
+        <button>Create post</button>
+      </form>
       <PostList posts={ posts } title="FIRST LIST OF POSTS"/>
       <br />
       <PostList posts={ posts2 } title="SECOND LIST OF POSTS"/>
