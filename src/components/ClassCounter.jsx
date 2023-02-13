@@ -1,4 +1,5 @@
 import React from "react"
+import MyButton from "./UI/button/MyButton"
 
 class ClassCounter extends React.Component {
 
@@ -26,8 +27,9 @@ class ClassCounter extends React.Component {
     return (
       <div>
       <h3>{ this.state.count }</h3>
-      <button onClick={ this.incr }>Increment</button>&nbsp;
-      <button onClick={ this.decr }>Decrement</button>
+      <MyButton disabled={false} onClick={ this.incr }>Increment</MyButton>&nbsp;
+      <MyButton disabled={false} onClick={ this.decr }>Decrement</MyButton>
+
       </div>
     )
   }
