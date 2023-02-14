@@ -25,12 +25,12 @@ const PostForm = ({ create }) => {
           placeholder="Post new title"
         />
       {/* Ниже показан управляемый компонент */}
-      <MyInput
+        <MyInput
           value={ post.body }
           onChange={ e => setPost({ ...post, body: e.target.value }) }
           type="text"
           placeholder="Post new description"
-          />
+        />
         <MyButton disabled={ false } onClick={ addNewPost }>Create post</MyButton>
       </form>
 
