@@ -10,7 +10,7 @@ const PostsList = ({ posts, title }) => {
       </h1>
       {posts.map( (post, index) => {
         return ( <div>
-          <PostItem number={ index+1 } post={ post } key={ Date.now() }/>
+          <PostItem number={ index+1 } post={ post } key={ post.id }/>
           <br />
         </div>
         )}
