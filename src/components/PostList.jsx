@@ -9,12 +9,12 @@ const PostsList = ({ posts, title, remove }) => {
         { title }
       </h1>
       {posts.map( (post, index) => {
-        return ( <div>
+        return ( <div key={ post.id.toString() }>
           <PostItem
             remove={ remove }
             number={ index+1 }
             post={ post }
-            key={ post.id.toString() }/>
+            />
           <br />
         </div>
         )}
