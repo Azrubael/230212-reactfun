@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import ClassCounter from './components/ClassCounter.jsx'
 import './styles/App.css'
 import PostList from './components/PostList.jsx'
@@ -15,12 +15,19 @@ function App() {
   ])
 
   const [ title, setTitle ] = useState('')
-  const bodyInputRef = useRef()
+  const [ body, setBody ] = useState('')
 
   const addNewPost = (e) => {
     e.preventDefault()
-    console.log(title)
-    console.log(bodyInputRef.current.value)
+    const newPost = {
+      id: posts.length + 1,
+      title,
+      body
+    }
+    console.log(newPost)
+    setPosts([...posts, newPost])
+    setTitle('')
+    setBody('')
   }
 
   return (
@@ -33,9 +40,10 @@ function App() {
           type="text"
           placeholder="Post new title"
         />
-      {/* Ниже показан HEуправляемый компонент */}
-        <MyInput
-          ref={ bodyInputRef }
+      {/* Ниже показан управляемый компонент */}
+      <MyInput
+          value={ body }
+          onChange={ e => setBody(e.target.value) }
           type="text"
           placeholder="Post new description"
           />
