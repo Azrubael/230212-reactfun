@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import ClassCounter from './components/ClassCounter.jsx'
 import './styles/App.css'
 import PostList from './components/PostList.jsx'
@@ -15,10 +15,12 @@ function App() {
   ])
 
   const [ title, setTitle ] = useState('')
+  const bodyInputRef = useRef()
 
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title)
+    console.log(bodyInputRef.current.value)
   }
 
   return (
@@ -31,7 +33,12 @@ function App() {
           type="text"
           placeholder="Post new title"
         />
-        <MyInput type="text" placeholder="Post new description" />
+      {/* Ниже показан HEуправляемый компонент */}
+        <MyInput
+          ref={ bodyInputRef }
+          type="text"
+          placeholder="Post new description"
+          />
         <MyButton disabled={ false } onClick={ addNewPost }>Create post</MyButton>
       </form>
       <PostList posts={ posts } title="FIRST LIST OF POSTS"/>
