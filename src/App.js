@@ -14,20 +14,12 @@ function App() {
     {id: 3, title: "Python", body: "Description Python"}
   ])
 
-  const [ title, setTitle ] = useState('')
-  const [ body, setBody ] = useState('')
+  const [ post, setPost ] = useState({ title: '', body: '' })
 
   const addNewPost = (e) => {
     e.preventDefault()
-    const newPost = {
-      id: posts.length + 1,
-      title,
-      body
-    }
-    console.log(newPost)
-    setPosts([...posts, newPost])
-    setTitle('')
-    setBody('')
+    setPosts([ ...posts, { ...post, id: Date.now() } ])
+    setPost({ title: '', body: '' })
   }
 
   return (
@@ -35,15 +27,15 @@ function App() {
       <form>
       {/* Ниже показан управляемый компонент */}
         <MyInput 
-          value={ title }
-          onChange={ e => setTitle(e.target.value) }
+          value={ post.title }
+          onChange={ e => setPost({ ...post, title: e.target.value }) }
           type="text"
           placeholder="Post new title"
         />
       {/* Ниже показан управляемый компонент */}
       <MyInput
-          value={ body }
-          onChange={ e => setBody(e.target.value) }
+          value={ post.body }
+          onChange={ e => setPost({ ...post, body: e.target.value }) }
           type="text"
           placeholder="Post new description"
           />
