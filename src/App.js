@@ -18,7 +18,6 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const sortedPosts = useMemo(() => {
-    console.log('Отработала функция ортировки постов')
     if (selectedSort) {
       // сортировка копии массива, а не массива напрямую
       // (если выбран параметр сортировки)
@@ -26,6 +25,11 @@ function App() {
     }
     return posts
   }, [selectedSort, posts])
+
+  const searchedAndSortedPosts = useMemo(() => {
+    return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery))
+    //в массив зависимостей передается поисковая строка и отсортированный массив
+  }, [searchQuery, sortedPosts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -61,9 +65,10 @@ function App() {
           ]}
         />
       </div>
-      {posts.length !== 0
-        ? <PostList remove={removePost} posts={sortedPosts} title="THE LIST OF POSTS" />
-        : <div><br /><h3>There is no more posts</h3>
+      {searchedAndSortedPosts.length !== 0
+        ? <PostList remove={removePost} posts={searchedAndSortedPosts} title="THE LIST OF POSTS" />
+        : <div><br />
+            <h3 style={{textAlign: 'center'}}>Posts not found</h3>
           <ClassCounter />
         </div>
       }
