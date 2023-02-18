@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import './styles/App.css'
 import PostList from './components/PostList.jsx'
 import PostForm from './components/UI/PostForm.jsx'
 import PostFilter from './components/PostFilter.jsx'
 import MyModal from './components/UI/MyModal/MyModal'
 import MyButton from './components/UI/button/MyButton'
+import { usePosts } from './hooks/usePosts'
 
 
 function App() {
@@ -16,20 +17,8 @@ function App() {
   ])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [modal, setModal] = useState(false)
+  const searchedAndSortedPosts = usePosts(posts, filter.sort, filter.query)
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sort) {
-      // сортировка копии массива, а не массива напрямую
-      // (если выбран параметр сортировки)
-      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-    }
-    return posts
-  }, [filter.sort, posts])
-
-  const searchedAndSortedPosts = useMemo(() => {
-    return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query))
-    //в массив зависимостей передается поисковая строка и отсортированный массив
-  }, [filter.query, sortedPosts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -44,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <MyButton style={{marginTop: 20}} onClick={() => setModal(true)}>
-        Create new post
+        Create a new post
       </MyButton>
       <MyModal visible={modal} setVisble={setModal}>
         <PostForm create={createPost} />

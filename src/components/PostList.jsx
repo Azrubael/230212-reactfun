@@ -1,6 +1,8 @@
 import React from "react"
 import PostItem from "./PostItem"
 import ClassCounter from "./ClassCounter"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
+// import * as uuid from "uuid"
 
 
 const PostsList = ({ posts, title, remove }) => {
@@ -16,21 +18,24 @@ const PostsList = ({ posts, title, remove }) => {
   }
 
   return (
-    <div>
+    <div >
       <h1 style={{ textAlign: 'center' }}>
         { title }
       </h1>
-      {posts.map( (post, index) => {
-        return ( <div key={ post.id.toString() }>
-          <PostItem
-            remove={ remove }
-            number={ index+1 }
-            post={ post }
-            />
-          <br />
-        </div>
-        )}
+      <TransitionGroup>
+       {posts.map( (post, index) => 
+            <CSSTransition
+              key={ post.id }
+              timeout={500}
+              classNames="post">
+              <PostItem
+                remove={ remove }
+                number={ index+1 }
+                post={ post }
+                />
+            </CSSTransition>
       )}
+      </TransitionGroup>
     </div>
   )
 }
