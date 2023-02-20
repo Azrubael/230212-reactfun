@@ -10,6 +10,7 @@ import PostService from './API/PostService'
 import Loader from './components/UI/Loader/Loader'
 import { useFetching } from './hooks/useFetching'
 import { getPageCount, getPagesArray } from './utils/pages'
+import Pagination from './components/UI/pagination/Pagination';
 
 function App() {
 
@@ -21,11 +22,7 @@ function App() {
   const [page, setPage] = useState(1)
   const searchedAndSortedPosts = usePosts(posts, filter.sort, filter.query)
 
-  let pagesArray = getPagesArray(totalPages)
-
-  console.log(pagesArray)
-
-  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
     const response = await PostService.getAll(limit,page)
     setPosts(response.data)
     const totalCount = response.headers['x-total-count']
@@ -33,8 +30,8 @@ function App() {
   })
   
   useEffect(() => { 
-    fetchPosts()
-  }, [])      //    <<<<< ????????  fetchPosts
+    fetchPosts(limit, page)
+  }, [])      //    <<<<< ????????  'fetchPosts' и убрать 'page'
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -46,9 +43,13 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+  const changePage = (page) => {
+    setPage(page)
+    fetchPosts(limit, page)
+  }
+
   return (
     <div className="App">
-      {/* <button onClick={ fetchPosts }>GET POSTS</button> */}
       <MyButton style={{marginTop: 20}} onClick={() => setModal(true)}>
         Create a new post
       </MyButton>
@@ -69,11 +70,11 @@ function App() {
           </div>
         : <PostList remove={removePost} posts={searchedAndSortedPosts} title="THE LIST OF POSTS" />
       }
-      <div className="page__wrapper">
-        { pagesArray.map(p => 
-          <span className="page" key={p.toString()}>{ p }</span>
-        )}
-      </div>
+      <Pagination
+        page={page}
+        changePage={changePage}
+        totalPages={totalPages}
+      />
     </div>
   )
 }

@@ -62,3 +62,8 @@ input, button {
   border: 1px solid teal;
   cursor: pointer;
 }
+
+.page__current {
+  border: 2px solid orange;
+  font-weight: bold;
+}
