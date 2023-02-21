@@ -3,7 +3,7 @@ import React from 'react';
 const ErrorPage = () => {
   return (
     <div>
-      ERROR 404. PATH NOT FOUND
+      <h3 style={{color: 'red'}}>ERROR 404. Path not found!</h3>
     </div>
   );
 };
