@@ -2,7 +2,8 @@ import React from 'react'
 import './styles/App.css'
 import { BrowserRouter } from 'react-router-dom'
 import Navbar from './components/UI/Navbar/Navbar'
-import AppRouter from './components/AppRouter'
+// import AppRouter from './components/AppRouter'
+import { AppRouterIndex } from './router/router-index'
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
   return (
     <BrowserRouter>
     <Navbar/>
-    <AppRouter/>
+    {/* <AppRouter/>   // не применяется после коммита 'Step #32'*/}
+    <AppRouterIndex/>  {/* применяется после коммита 'Step #32'*/}
     </BrowserRouter>
   )
 }
