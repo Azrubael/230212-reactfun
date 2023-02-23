@@ -11,10 +11,14 @@ import Posts from "../pages/Posts"
 import PostIdPage from "../pages/PostIdPage"
 import ErrorPage from "../pages/ErrorPage"
 import Login from "../pages/Login"
+import { useContext } from "react"
+import { AuthContext } from "../context/index-context"
+import Loader from "../components/UI/Loader/Loader"
 
 
 const privateRoutes = [
   { path: '/about', element: <About /> },
+  { path: '/login', element: <About /> },
   { path: '', element: <Posts /> },
   { path: '/posts', children: [
       { index: true, element: <Posts /> },
@@ -30,13 +34,10 @@ const publicRoutes = [
 
 
 export function AppRouterIndex() {
-  
-  const isAuth = true
+  const {isAuth, isLoading} = useContext(AuthContext)
+  if (isLoading) { <Loader /> }
 
-  // очень интересная конструкция для склеивания массивов путей
-  // const routes = useRoutes([...privateRoutes, ...publicRoutes])
   const routes = useRoutes(isAuth ? privateRoutes : publicRoutes)
-  console.log(isAuth)
   
   return routes
 }

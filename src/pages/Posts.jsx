@@ -17,7 +17,8 @@ function Posts() {
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [modal, setModal] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(0)
+        setLimit(10)
   const [page, setPage] = useState(1)
   const searchedAndSortedPosts = usePosts(posts, filter.sort, filter.query)
 
@@ -50,7 +51,7 @@ function Posts() {
   return (
     <div className="App">
       <MyButton style={{marginTop: 20}} onClick={() => setModal(true)}>
-        Create a new post
+        Create post
       </MyButton>
       <MyModal visible={modal} setVisble={setModal}>
         <PostForm create={createPost} />
